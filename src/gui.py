@@ -1,7 +1,7 @@
 """Módulo de la interfaz gráfica del resolutor de sudoku."""
 
 import pygame
-from solver import Board
+from solver import Board, EMPTY_CELL
 
 
 class SudokuGUI:
@@ -15,6 +15,7 @@ class SudokuGUI:
         self.window_size = 450
         self.cell_size = self.window_size // 9
         self.screen: pygame.Surface | None = None
+        self.font: pygame.font.Font | None = None
 
     def _draw_grid(self) -> None:
         """Dibuja la cuadrícula del Sudoku."""
@@ -41,11 +42,26 @@ class SudokuGUI:
                 width,
             )
 
+    def _draw_numbers(self) -> None:
+        assert self.screen is not None
+        assert self.font is not None
+        for row in range(9):
+            for col in range(9):
+                value = self.board[row][col]
+                if value == EMPTY_CELL:
+                    continue
+                text = self.font.render(str(value), True, (0, 0, 0))
+                x = col * self.cell_size + self.cell_size // 2
+                y = row * self.cell_size + self.cell_size // 2
+                rect  = text.get_rect(center=(x, y))
+                self.screen.blit(text, rect)
+
     def run(self) -> None:
         """Loop principal de la aplicación."""
         pygame.init()
         self.screen = pygame.display.set_mode((self.window_size, self.window_size))
         pygame.display.set_caption("Resolutor de Sudoku")
+        self.font = pygame.font.SysFont(None, self.cell_size // 2)
         running = True
         while running:
             for event in pygame.event.get():
@@ -53,5 +69,6 @@ class SudokuGUI:
                     running = False
             self.screen.fill((255, 255, 255))
             self._draw_grid()
+            self._draw_numbers()
             pygame.display.flip()
         pygame.quit()
