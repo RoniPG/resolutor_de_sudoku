@@ -22,9 +22,33 @@ def find_empty_position(board: Board) -> Optional[Position]:
                 return (row, col)
     return None
 
+def is_valid_move(board: Board, row: int, col: int, value:int) -> bool:
+    """
+    Indica si `value` se puede colocar en (row, col) sin romper las reglas.
+    """
+    # Comprobar fila
+    for c in range(BOARD_SIZE):
+        if board[row][c] == value:
+            return False
+    
+    # Comprobar columna
+    for r in range(BOARD_SIZE):
+        if board[r][col] == value:
+            return False
+
+    # Comprobar subcuadrícula
+    start_row = (row // SUBGRID_SIZE) * SUBGRID_SIZE
+    start_col = (col // SUBGRID_SIZE) * SUBGRID_SIZE
+    for r in range(start_row, start_row + SUBGRID_SIZE):
+        for c in range(start_col, start_col + SUBGRID_SIZE):
+            if board[r][c] == value:
+                return False
+
+    return True
 
 def solve_sudoku(board):
     """
     Resuelve un sudoku usando backtracking.
     """
     pass
+
