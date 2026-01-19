@@ -46,9 +46,33 @@ def is_valid_move(board: Board, row: int, col: int, value:int) -> bool:
 
     return True
 
+
+def _backtack(board: Board) -> bool:
+    """
+    Algoritmo de backtracking que modifica el tablero en sitio.
+    Devuelve True si encuentra una solución valida.
+    """
+    empty_pos = find_empty_position(board)
+    if empty_pos is None:
+        return True  # No hay casillas vacías
+    
+    row, col = empty_pos
+    for value in range(1, BOARD_SIZE + 1):
+        if is_valid_move(board, row, col, value):
+            board[row][col] = value  # Colocar el valor
+            
+            if _backtack(board):
+                return True  # Solución encontrada
+            
+            board[row][col] = EMPTY_CELL  # Retroceder
+    
+    return False
+
 def solve_sudoku(board):
     """
     Resuelve un sudoku usando backtracking.
     """
-    pass
+    if not _backtack(board):
+        raise ValueError("El Sudoku no tiene solución")
+    return board
 
