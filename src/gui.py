@@ -1,5 +1,5 @@
 """Módulo de la interfaz gráfica del resolutor de sudoku."""
-
+import pygame
 from solver import Board
 
 
@@ -13,5 +13,15 @@ class SudokuGUI:
         self.board = board
 
     def run(self) -> None:
-        """Loop principal de la aplicación (aún no implementado)."""
-        pass
+        """Loop principal de la aplicación."""
+        pygame.init()
+        screen = pygame.display.set_mode((400, 400))
+        pygame.display.set_caption("Resolutor de Sudoku")
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+        pygame.quit()
+
+        
