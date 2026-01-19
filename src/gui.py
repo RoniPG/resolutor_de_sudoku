@@ -9,9 +9,10 @@ class SudokuGUI:
     Clase encargada de la ventana pygame y la visualización del tablero.
     """
 
-    def __init__(self, board: Board) -> None:
+    def __init__(self, board: Board, initial_board: Board) -> None:
         """Inicializa la GUI con un tablero inicial."""
         self.board = board
+        self.initial_board = initial_board
         self.window_size = 450
         self.cell_size = self.window_size // 9
         self.screen: pygame.Surface | None = None
@@ -50,7 +51,9 @@ class SudokuGUI:
                 value = self.board[row][col]
                 if value == EMPTY_CELL:
                     continue
-                text = self.font.render(str(value), True, (0, 0, 0))
+                is_initial = self.initial_board[row][col] != EMPTY_CELL
+                color = (0, 0, 0) if is_initial else (0, 0, 200)
+                text = self.font.render(str(value), True, color)
                 x = col * self.cell_size + self.cell_size // 2
                 y = row * self.cell_size + self.cell_size // 2
                 rect  = text.get_rect(center=(x, y))
