@@ -22,7 +22,8 @@ def main() -> None:
         print(row)
 
     gui = SudokuGUI(board)
-    print(type(gui).__name__)
+    print("Ejecutando la interfaz gráfica...")
+    gui.run()
 
 
 if __name__ == "__main__":
