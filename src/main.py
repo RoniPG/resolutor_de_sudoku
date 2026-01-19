@@ -3,11 +3,21 @@ Punto de entrada de la aplicación Resolutor de Sudoku.
 Más adelante inicializaremos aquí la GUI con pygame y la lógica del solver.
 """
 
+from solver import Board, EMPTY_CELL, solve_sudoku
 
 def main() -> None:
     """Función principal de la aplicación."""
-    print("Resolutor de Sudoku")
-
+    board: Board = [
+        [EMPTY_CELL for _ in range(9)]
+        for _ in range(9)
+    ]
+    print("Tablero inicial:")
+    for row in board:
+        print(row)
+    solve_sudoku(board)
+    print("Tablero resuelto:")
+    for row in board:
+        print(row)
 
 if __name__ == "__main__":
     main()
