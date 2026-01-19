@@ -25,6 +25,8 @@ sudoku-solver/
 │
 ├── src/                 
 │   └── main.py
+│   └── solver.py
+│   └── gui.py
 │
 ├── .gitignore
 ├── README.md
