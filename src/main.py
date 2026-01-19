@@ -4,11 +4,11 @@ Punto de entrada de la aplicación Resolutor de Sudoku.
 
 from solver import Board, EMPTY_CELL, solve_sudoku
 from gui import SudokuGUI
-
+from puzzles import EXAMPLE_BOARD
 
 def main() -> None:
     """Función principal de la aplicación."""
-    board: Board = [[EMPTY_CELL for _ in range(9)] for _ in range(9)]
+    board: Board = [row[:] for row in EXAMPLE_BOARD]
 
     print("Tablero inicial:")
 
