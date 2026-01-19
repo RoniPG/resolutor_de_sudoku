@@ -70,8 +70,11 @@ class SudokuGUI:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-                elif event.type == pygame.KEYDOWN and event.key == pygame.K_s:
-                    solve_sudoku(self.board)
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_s:
+                        solve_sudoku(self.board)
+                    elif event.key == pygame.K_r:
+                        self.board = [row[:] for row in self.initial_board]
             self.screen.fill((255, 255, 255))
             self._draw_grid()
             self._draw_numbers()
