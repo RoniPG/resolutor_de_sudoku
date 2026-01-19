@@ -59,6 +59,13 @@ class SudokuGUI:
                 rect  = text.get_rect(center=(x, y))
                 self.screen.blit(text, rect)
 
+    def _draw_instructions(self) -> None:
+        """Dibuja las instrucciones en la ventana."""
+        assert self.screen is not None
+        assert self.font is not None
+        text = self.font.render("Presiona 'S' para resolver | 'R' para reiniciar", True, (80, 80, 80))
+        self.screen.blit(text, (10, self.window_size - 30))
+
     def run(self) -> None:
         """Loop principal de la aplicación."""
         pygame.init()
@@ -78,5 +85,6 @@ class SudokuGUI:
             self.screen.fill((255, 255, 255))
             self._draw_grid()
             self._draw_numbers()
+            self._draw_instructions()
             pygame.display.flip()
         pygame.quit()
