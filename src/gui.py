@@ -1,7 +1,7 @@
 """Módulo de la interfaz gráfica del resolutor de sudoku."""
 
 import pygame
-from solver import Board, EMPTY_CELL
+from solver import Board, EMPTY_CELL, solve_sudoku
 
 
 class SudokuGUI:
@@ -70,6 +70,8 @@ class SudokuGUI:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_s:
+                    solve_sudoku(self.board)
             self.screen.fill((255, 255, 255))
             self._draw_grid()
             self._draw_numbers()

@@ -2,7 +2,7 @@
 Punto de entrada de la aplicación Resolutor de Sudoku.
 """
 
-from solver import Board, EMPTY_CELL, solve_sudoku
+from solver import Board
 from gui import SudokuGUI
 from puzzles import EXAMPLE_BOARD
 
@@ -19,13 +19,13 @@ def main() -> None:
     """
     for row in board:
         print(row)
-    """
     
     solve_sudoku(board)
     print("Tablero resuelto:")
 
     for row in board:
         print(row)
+    """
 
     gui = SudokuGUI(initial_board=initial_board, board=board)
     print("Ejecutando la interfaz gráfica...")
